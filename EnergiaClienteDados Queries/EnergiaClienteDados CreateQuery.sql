@@ -24,6 +24,14 @@ horario			NVARCHAR(50)
 )
 GO
 
+CREATE TABLE Titular(
+idHabitacao		INT FOREIGN KEY REFERENCES Habitacao(id),
+nomeCompleto	NVARCHAR(250),
+nif				NVARCHAR(9),
+contacto		NVARCHAR(9),
+)
+GO
+
 CREATE TABLE Fatura(
 numero			NVARCHAR(250) PRIMARY KEY,
 dataInicio		DATE,
