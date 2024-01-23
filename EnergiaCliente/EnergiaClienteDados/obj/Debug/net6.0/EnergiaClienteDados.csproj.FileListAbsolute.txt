@@ -1,10 +1,14 @@
 C:\Projects\EnergiaClienteProjeto\EnergiaCliente\EnergiaClienteDados\bin\Debug\net6.0\EnergiaClienteDados.deps.json
 C:\Projects\EnergiaClienteProjeto\EnergiaCliente\EnergiaClienteDados\bin\Debug\net6.0\EnergiaClienteDados.dll
 C:\Projects\EnergiaClienteProjeto\EnergiaCliente\EnergiaClienteDados\bin\Debug\net6.0\EnergiaClienteDados.pdb
+C:\Projects\EnergiaClienteProjeto\EnergiaCliente\EnergiaClienteDados\bin\Debug\net6.0\EnergiaClienteDominio.dll
+C:\Projects\EnergiaClienteProjeto\EnergiaCliente\EnergiaClienteDados\bin\Debug\net6.0\EnergiaClienteDominio.pdb
+C:\Projects\EnergiaClienteProjeto\EnergiaCliente\EnergiaClienteDados\obj\Debug\net6.0\EnergiaClienteDados.csproj.AssemblyReference.cache
 C:\Projects\EnergiaClienteProjeto\EnergiaCliente\EnergiaClienteDados\obj\Debug\net6.0\EnergiaClienteDados.GeneratedMSBuildEditorConfig.editorconfig
 C:\Projects\EnergiaClienteProjeto\EnergiaCliente\EnergiaClienteDados\obj\Debug\net6.0\EnergiaClienteDados.AssemblyInfoInputs.cache
 C:\Projects\EnergiaClienteProjeto\EnergiaCliente\EnergiaClienteDados\obj\Debug\net6.0\EnergiaClienteDados.AssemblyInfo.cs
 C:\Projects\EnergiaClienteProjeto\EnergiaCliente\EnergiaClienteDados\obj\Debug\net6.0\EnergiaClienteDados.csproj.CoreCompileInputs.cache
+C:\Projects\EnergiaClienteProjeto\EnergiaCliente\EnergiaClienteDados\obj\Debug\net6.0\EnergiaClienteDados.csproj.CopyComplete
 C:\Projects\EnergiaClienteProjeto\EnergiaCliente\EnergiaClienteDados\obj\Debug\net6.0\EnergiaClienteDados.dll
 C:\Projects\EnergiaClienteProjeto\EnergiaCliente\EnergiaClienteDados\obj\Debug\net6.0\refint\EnergiaClienteDados.dll
 C:\Projects\EnergiaClienteProjeto\EnergiaCliente\EnergiaClienteDados\obj\Debug\net6.0\EnergiaClienteDados.pdb
