@@ -1,0 +1,64 @@
+{
+	"info": {
+		"_postman_id": "5c89eeed-4658-4635-b5ff-f111cfbcd7cc",
+		"name": "EnergiaCliente",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32553097",
+		"_collection_link": "https://www.postman.com/rubenmpereira/workspace/energiacliente/collection/32553097-5c89eeed-4658-4635-b5ff-f111cfbcd7cc?action=share&source=collection_link&creator=32553097"
+	},
+	"item": [
+		{
+			"name": "GetInvoices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/GetInvoices?habitation=2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"GetInvoices"
+					],
+					"query": [
+						{
+							"key": "habitation",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"status code is 200\",function(){",
+					"    pm.expect(pm.response.code,\"status\").to.equal(200);",
+					"})"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:7049",
+			"type": "string"
+		}
+	]
+}
