@@ -11,50 +11,56 @@ namespace EnergiaClienteDados
     {
         private SqlConnection connection = new SqlConnection("Data Source=MSIRUBEN\\SQLEXPRESS;Initial Catalog=EnergiaClienteDados;Integrated Security=True;TrustServerCertificate=True");
 
-        public List<Invoice> GetInvoices(GetInvoicesRequestModel requestModel)
+        public dbResponse<Invoice> GetInvoices(GetInvoicesRequestModel requestModel)
         {
             //set parameters
-            var param = new SqlParameter("habitacao", requestModel.habitacao);
+            var param = new SqlParameter("habitacao", requestModel.habitation);
 
             //execute stored procedure
             var response = RunSelectProcedure("UltimasFaturas", new SqlParameter[1] { param });
+
+            if (response.Count == 0)
+                return new dbResponse<Invoice> { error = true, errorMessage = "Not found", statusCode = 404 };
 
             //mapping
             var invoices = new List<Invoice>();
             foreach (DataRow row in response)
             {
                 var invoice = new Invoice();
-                invoice.number = row["numero"].ToString();
-                invoice.startDate = DateTime.Parse(row["dataInicio"].ToString());
-                invoice.endDate = DateTime.Parse(row["dataFim"].ToString());
-                invoice.Paid = bool.Parse(row["pago"].ToString());
-                invoice.Value = decimal.Parse(row["valor"].ToString());
-                invoice.limitDate = DateTime.Parse(row["dataLimite"].ToString());
-                invoice.habitation = int.Parse(row["idHabitacao"].ToString());
+                invoice.number = GetParam<string>(row["numero"]);
+                invoice.startDate = GetParam<DateTime>(row["dataInicio"]);
+                invoice.endDate = GetParam<DateTime>(row["dataFim"]);
+                invoice.Paid = GetParam<bool>(row["pago"]);      
+                invoice.Value = GetParam<decimal>(row["valor"]);
+                invoice.limitDate = GetParam<DateTime>(row["dataLimite"]);
+                invoice.habitation = GetParam<int>(row["idHabitacao"]);
                 invoice.document = Encoding.ASCII.GetBytes(row["documento"].ToString());
                 invoices.Add(invoice);
             }
 
-            return invoices;
+            return new dbResponse<Invoice>
+            {
+                result = invoices,
+                error = false
+            };
         }
 
-        private int Run(SqlCommand command)
-        {
-            command.Connection = connection;
-            return command.ExecuteNonQuery();
-        }
+        private T GetParam<T>(object value) {
 
-        private DataRowCollection RunGet(SqlCommand command)
-        {
-            command.Connection = connection;
-            var dataAdapter = new SqlDataAdapter(command);
-            var dataSet = new DataSet();
-            dataAdapter.Fill(dataSet);
+            string param = value.ToString();
 
-            if (dataSet.Tables[0].Rows.Count == 0)
-                return null;
+            T result;
 
-            return dataSet.Tables[0].Rows;
+            try
+            {
+               result = (T)Convert.ChangeType(param, typeof(T));
+            }
+            catch
+            {
+                result = default(T);
+            }
+
+            return result;
         }
 
         private DataRowCollection RunSelectProcedure(string procedure, SqlParameter[] parameters)
@@ -64,9 +70,6 @@ namespace EnergiaClienteDados
             dataAdapter.SelectCommand.Parameters.AddRange(parameters);
             var dataSet = new DataSet();
             dataAdapter.Fill(dataSet);
-
-            if (dataSet.Tables[0].Rows.Count == 0)
-                return null;
 
             return dataSet.Tables[0].Rows;
         }

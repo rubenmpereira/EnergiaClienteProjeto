@@ -28,7 +28,8 @@ namespace EnergiaCliente
 
             Database database = new Database();
 
-            var data = database.GetInvoices(new GetInvoicesRequestModel() { habitacao = 1 });
+            var param = req.Query.Get("habitation");
+            var data = database.GetInvoices(new GetInvoicesRequestModel() { habitation = int.Parse(param) });
 
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/plain; charset=utf-8");

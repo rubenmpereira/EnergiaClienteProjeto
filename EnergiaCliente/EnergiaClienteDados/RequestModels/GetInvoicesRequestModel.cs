@@ -8,6 +8,6 @@ namespace EnergiaClienteDados.RequestModels
 {
     public class GetInvoicesRequestModel
     {
-        public int habitacao { get; set; }
+        public int habitation { get; set; }
     }
 }
