@@ -30,7 +30,7 @@ namespace EnergiaClienteDados
                 invoice.number = GetParam<string>(row["numero"]);
                 invoice.startDate = GetParam<DateTime>(row["dataInicio"]);
                 invoice.endDate = GetParam<DateTime>(row["dataFim"]);
-                invoice.Paid = GetParam<bool>(row["pago"]);      
+                invoice.Paid = GetParam<bool>(row["pago"]);
                 invoice.Value = GetParam<decimal>(row["valor"]);
                 invoice.limitDate = GetParam<DateTime>(row["dataLimite"]);
                 invoice.habitation = GetParam<int>(row["idHabitacao"]);
@@ -45,7 +45,47 @@ namespace EnergiaClienteDados
             };
         }
 
-        private T GetParam<T>(object value) {
+        public dbResponse<Reading> GetReadings(GetReadingsRequestModel requestModel)
+        {
+            //set parameters
+            var parameters = new SqlParameter[2] {
+                new SqlParameter("habitacao", requestModel.habitation),
+                new SqlParameter("quantidade", requestModel.quantity)
+            };
+
+            //execute stored procedure
+            var response = RunSelectProcedure("UltimasLeituras", parameters);
+
+            if (response.Count == 0)
+                return new dbResponse<Reading> { error = true, errorMessage = "Not found", statusCode = 404 };
+
+            //mapping
+            var readings = new List<Reading>();
+            foreach (DataRow row in response)
+            {
+                var reading = new Reading();
+                reading.id = GetParam<int>(row["id"]);
+                reading.vazio = GetParam<int>(row["vazio"]);
+                reading.ponta = GetParam<int>(row["ponta"]);
+                reading.cheias = GetParam<int>(row["cheias"]);
+                reading.month = GetParam<int>(row["mes"]);
+                reading.year = GetParam<int>(row["ano"]);
+                reading.readingDate = GetParam<DateTime>(row["dataLeitura"]);
+                reading.habitation = GetParam<int>(row["idHabitacao"]);
+                reading.estimated = GetParam<bool>(row["estimada"]);
+
+                readings.Add(reading);
+            }
+
+            return new dbResponse<Reading>
+            {
+                result = readings,
+                error = false
+            };
+        }
+
+        private T GetParam<T>(object value)
+        {
 
             string param = value.ToString();
 
@@ -53,7 +93,7 @@ namespace EnergiaClienteDados
 
             try
             {
-               result = (T)Convert.ChangeType(param, typeof(T));
+                result = (T)Convert.ChangeType(param, typeof(T));
             }
             catch
             {

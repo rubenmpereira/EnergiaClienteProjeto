@@ -30,6 +30,34 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "GetReadings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/GetReadings?habitation=2&quantity=10",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"GetReadings"
+					],
+					"query": [
+						{
+							"key": "habitation",
+							"value": "2"
+						},
+						{
+							"key": "quantity",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [

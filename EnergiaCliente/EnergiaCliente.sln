@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnergiaCliente", "EnergiaCl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnergiaClienteDados", "EnergiaClienteDados\EnergiaClienteDados.csproj", "{E47B26BB-BDC1-4049-9781-E34B748820EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergiaClienteDominio", "EnergiaClienteDominio\EnergiaClienteDominio.csproj", "{BF242F60-2407-4452-82AD-E31C8686BE2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnergiaClienteDominio", "EnergiaClienteDominio\EnergiaClienteDominio.csproj", "{BF242F60-2407-4452-82AD-E31C8686BE2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

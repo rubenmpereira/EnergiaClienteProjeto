@@ -1,35 +1,32 @@
 using System.Net;
+using EnergiaClienteDados.RequestModels;
+using EnergiaClienteDados;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
-using EnergiaClienteDados;
-using EnergiaClienteDominio;
-using EnergiaClienteDados.RequestModels;
-using Grpc.Core;
-using System.Net.Http.Headers;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace EnergiaCliente
 {
-    public class EnergiaClienteController
+    public class GetReadings
     {
         private readonly ILogger _logger;
 
-        public EnergiaClienteController(ILoggerFactory loggerFactory)
+        public GetReadings(ILoggerFactory loggerFactory)
         {
-            _logger = loggerFactory.CreateLogger<EnergiaClienteController>();
+            _logger = loggerFactory.CreateLogger<GetReadings>();
         }
 
-        [Function("GetInvoices")]
+        [Function("GetReadings")]
         public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
 
             Database database = new Database();
 
-            var param = req.Query.Get("habitation");
-            var data = database.GetInvoices(new GetInvoicesRequestModel() { habitation = int.Parse(param) });
+            var requestModel = new GetReadingsRequestModel() { habitation = int.Parse(req.Query.Get("habitation")), quantity = int.Parse(req.Query.Get("quantity")) };
+
+            var data = database.GetReadings(requestModel);
 
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
